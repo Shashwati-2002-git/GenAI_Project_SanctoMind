@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <main class="dashboard-container">
+    <div class="dashboard-card">My Appointments</div>
+    <div class="dashboard-card" onclick="window.location.href='mood-graph.html'">Mood Graphs</div>
+    <div class="dashboard-card" onclick="window.location.href='progress-graph.html'">Progress Graphs</div>
+    <div class="dashboard-card">Professional Interactions</div>
+    <div class="dashboard-card">Quiz Scores</div>
+    <div class="dashboard-card">Community Interactions</div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script src="header.js" defer></script>
+
+  <script>
+    async function loadComponent(id, file) {
+        const res = await fetch(file);
+        document.getElementById(id).innerHTML = await res.text();
+
+        // If header loaded, attach header.js
+        if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        script.onload = () => {
+            if (window.updateHeader) window.updateHeader();
+        };
+        document.body.appendChild(script);
+        }
+    }
+
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+  </script>
+</body>
+</html>

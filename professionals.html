@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Counsellors</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/professionals.css">
+  <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <!-- Heading below header -->
+  <h1 class="page-heading">Our Mental Health Counsellors</h1>
+
+  <div id="counsellors" class="pro-container"></div>
+
+  <div id="footer"></div>
+
+  <script>
+    // Load header/footer components
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+
+      if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        script.onload = () => {
+          if (window.updateHeader) window.updateHeader();
+        };
+        document.body.appendChild(script);
+      }
+    }
+
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    const counsellorsData = [
+    {
+      HC_ID: 1,
+      HC_Name: "Dr. Arjun Mehta",
+      HC_Sp_Field: "ADHD",
+      HC_Profile_URL: "Psychiatrist1.jpeg",
+      HC_WD_Timing: "9 AM - 6 PM",
+      HC_SD_Timing: "10 AM - 1 PM"
+    },
+    {
+      HC_ID: 2,
+      HC_Name: "Dr. Priya Sharma",
+      HC_Sp_Field: "General Mental Health",
+      HC_Profile_URL: "Psychiatrist2.jpeg",
+      HC_WD_Timing: "9 AM - 5 PM",
+      HC_SD_Timing: "10 AM - 2 PM"
+    },
+    {
+      HC_ID: 3,
+      HC_Name: "Dr. Rohan Kapoor",
+      HC_Sp_Field: "Anxiety & Depression",
+      HC_Profile_URL: "Psychiatrist3.jpeg",
+      HC_WD_Timing: "10 AM - 6 PM",
+      HC_SD_Timing: "11 AM - 3 PM"
+    },
+    {
+      HC_ID: 4,
+      HC_Name: "Dr. Anjali Rao",
+      HC_Sp_Field: "OCD Specialist",
+      HC_Profile_URL: "Psychiatrist4.jpeg",
+      HC_WD_Timing: "9 AM - 4 PM",
+      HC_SD_Timing: "Closed"
+    },
+    {
+      HC_ID: 5,
+      HC_Name: "Dr. Sameer Khanna",
+      HC_Sp_Field: "PTSD",
+      HC_Profile_URL: "Psychiatrist5.jpeg",
+      HC_WD_Timing: "8 AM - 3 PM",
+      HC_SD_Timing: "Closed"
+    },
+    {
+      HC_ID: 6,
+      HC_Name: "Dr. Neha Verma",
+      HC_Sp_Field: "Alzheimer's",
+      HC_Profile_URL: "Psychiatrist6.jpeg",
+      HC_WD_Timing: "11 AM - 7 PM",
+      HC_SD_Timing: "12 PM - 4 PM"
+    },
+    {
+      HC_ID: 7,
+      HC_Name: "Dr. Karan Singh",
+      HC_Sp_Field: "Addiction Psychiatry",
+      HC_Profile_URL: "Psychiatrist7.jpeg",
+      HC_WD_Timing: "9 AM - 6 PM",
+      HC_SD_Timing: "10 AM - 12 PM"
+    },
+    {
+      HC_ID: 8,
+      HC_Name: "Dr. Meera Iyer",
+      HC_Sp_Field: "Dementia",
+      HC_Profile_URL: "Psychiatrist8.jpeg",
+      HC_WD_Timing: "10 AM - 5 PM",
+      HC_SD_Timing: "Closed"
+    }
+  ];
+
+
+    // Render counsellor cards
+    function loadCounsellors() {
+      const container = document.getElementById("counsellors");
+      container.innerHTML = counsellorsData.map(c => `
+        <div class="pro-card">
+          <img src="images/${c.HC_Profile_URL}" alt="${c.HC_Name}">
+          <h3>${c.HC_Name}</h3>
+          <p><strong>Specialization:</strong> ${c.HC_Sp_Field}</p>
+          <p class="timing"><strong>Weekdays:</strong> ${c.HC_WD_Timing}</p>
+          <p class="timing"><strong>Sunday:</strong> ${c.HC_SD_Timing}</p>
+          <button class="view-profile-btn" onclick="viewProfile(${c.HC_ID})">View Profile</button>
+        </div>
+      `).join("");
+    }
+
+    function viewProfile(id) {
+      window.location.href = `psychiatrist-profile.html?hc_id=${id}`;
+    }
+
+    loadCounsellors();
+  </script>
+</body>
+</html>

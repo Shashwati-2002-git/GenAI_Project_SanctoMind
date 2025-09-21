@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Mental Wellness Platform</title>
+      <link rel="stylesheet" href="styles/header.css">
+      <link rel="stylesheet" href="styles/index.css">
+      <link rel="stylesheet" href="styles/footer.css">
+    </head>
+    <body>
+
+      <div id="header"></div>
+
+      <div class="container">
+        <!-- Human Psychiatrists -->
+        <div class="card">
+          <h3>👩‍⚕️ Connect with Human Psychiatrists</h3>
+          <p>Browse trusted, verified mental health psychiatrists to get mental health support, diagnosis and treatment.</p>
+          <button class="btn" onclick="window.location.href='professionals.html'">View Psychiatrists</button>
+        </div>
+
+        <!-- Human Mental Health Counsellors -->
+        <div class="card">
+          <h3>👩‍⚕️ Connect with Human Mental Health Counsellors</h3>
+          <p>Connect with our verified mental health counsellors to receive personalized support, guidance, and professional care.</p>
+          <button class="btn" onclick="window.location.href='human-counsellors.html'">View Counsellors</button>
+        </div>
+
+        <!-- General AI Professional -->
+        <div class="card">
+          <h3>🤖 AI General Mental Health Counsellor</h3>
+          <p>Talk with an empathetic AI mental health counsellor and guide to understand your symptoms and get support.</p>
+          <button class="btn" onclick="window.location.href='generalchat.html'">Chat Now</button>
+        </div>
+
+        <!-- Specialist AI Professionals -->
+        <div class="card">
+          <h3>🧠 Specialist AI Mental Health Counsellors</h3>
+          <p>Get tailored help from AI Counsellors specializing in Anxiety, Depression, and many other mental health conditions.</p>
+          <button class="btn" onclick="window.location.href='ai-counsellors.html'">View AI Counsellors</button>
+        </div>
+
+        <!-- Personalized Wellness Checklist -->
+        <div class="card">
+          <h3>📝 Personalized Wellness Checklist</h3>
+          <p>Create AI-tailored checklists for your mental health condition. Stay organized, and build healthy habits with guidance designed by AI just for you.</p>
+          <button class="btn" onclick="window.location.href='checklist.html'">Create Checklist</button>
+        </div>
+
+        <!-- Confidential Diary -->
+        <div class="card">
+          <h3>📔 Your Confidential Diary</h3>
+          <p>Write your thoughts and feelings securely in your confidential diary that responds to you empathetically. Only you can access your confidential diary.</p>
+          <button class="btn" onclick="window.location.href='diary.html'">Open Diary</button>
+        </div>
+
+        <!-- Current Mood Logger-->
+         <div class="card">
+          <h3>🎮 Mood Logger</h3>
+          <p>Log your mood to visualize your emotional patterns with graphs and AI insights.</p>
+          <button class="btn" onclick="window.location.href='mood-tracker.html'">Log Your Mood</button>
+        </div>
+
+        <!-- Progress Game -->
+        <div class="card">
+          <h3>🎮 Take Quizzes</h3>
+          <p>Diagnose conditions and track your progress journey with quizzes</p>
+          <button class="btn" onclick="window.location.href='quiz.html'">Take Quiz</button>
+        </div>
+
+        <!-- Community Safe Space -->
+        <div class="card">
+          <h3>🌐 Community Safe Space</h3>
+          <p>Join and create supportive communities to share experiences and find solidarity.</p>
+          <button class="btn" onclick="window.location.href='communities.html'">Create or Join Community</button>
+        </div>
+      </div>
+
+      <div id="footer"></div>
+
+      <script src="header.js" defer></script>
+      
+      <script>
+        async function loadComponent(id, file) {
+          const res = await fetch(file);
+          document.getElementById(id).innerHTML = await res.text();
+
+          // If header loaded, attach header.js
+          if (id === "header") {
+            const script = document.createElement("script");
+            script.src = "header.js";
+            script.onload = () => {
+              if (window.updateHeader) window.updateHeader();
+            };
+            document.body.appendChild(script);
+          }
+        }
+
+        loadComponent("header", "header.html");
+        loadComponent("footer", "footer.html");
+      </script>
+    </body>
+  </html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Counsellor Profile</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/counsellor-profile.css">
+  <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="profile-container" id="profile"></div>
+
+  <div id="footer"></div>
+
+  <script src="header.js" defer></script>
+
+  <script>
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+      if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        script.onload = () => { if (window.updateHeader) window.updateHeader(); };
+        document.body.appendChild(script);
+      }
+    }
+
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    // Same counsellors data (ideally put in a shared file, but duplicating here for now)
+    const counsellors = [
+      { HC_ID: 1, HC_Name: "Dr. Priya Sharma", HC_Sp_Field: "General Mental Health", HC_Profile_URL: "Counsellor1.jpeg", HC_WD_Timing: "9 AM - 5 PM", HC_SD_Timing: "10 AM - 2 PM" },
+      { HC_ID: 2, HC_Name: "Dr. Arjun Mehta", HC_Sp_Field: "ADHD", HC_Profile_URL: "Counsellor2.jpeg", HC_WD_Timing: "9 AM - 6 PM", HC_SD_Timing: "10 AM - 1 PM" },
+      { HC_ID: 3, HC_Name: "Dr. Anjali Rao", HC_Sp_Field: "OCD", HC_Profile_URL: "Counsellor3.jpeg", HC_WD_Timing: "9 AM - 4 PM", HC_SD_Timing: "Closed" },
+      { HC_ID: 4, HC_Name: "Dr. Rohan Kapoor", HC_Sp_Field: "Anxiety & Depression", HC_Profile_URL: "Counsellor4.jpeg", HC_WD_Timing: "10 AM - 6 PM", HC_SD_Timing: "11 AM - 3 PM" },
+      { HC_ID: 5, HC_Name: "Dr. Neha Verma", HC_Sp_Field: "Stress Management", HC_Profile_URL: "Counsellor5.jpeg", HC_WD_Timing: "11 AM - 7 PM", HC_SD_Timing: "12 PM - 4 PM" },
+      { HC_ID: 6, HC_Name: "Dr. Sameer Khanna", HC_Sp_Field: "PTSD", HC_Profile_URL: "Counsellor6.jpeg", HC_WD_Timing: "8 AM - 3 PM", HC_SD_Timing: "Closed" },
+      { HC_ID: 7, HC_Name: "Dr. Meera Iyer", HC_Sp_Field: "Social Anxiety", HC_Profile_URL: "Counsellor7.jpeg", HC_WD_Timing: "10 AM - 5 PM", HC_SD_Timing: "Closed" },
+      { HC_ID: 8, HC_Name: "Dr. Karan Singh", HC_Sp_Field: "Addiction", HC_Profile_URL: "Counsellor8.jpeg", HC_WD_Timing: "9 AM - 6 PM", HC_SD_Timing: "10 AM - 12 PM" }
+    ];
+
+    // Get counsellor ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("hc_id"));
+
+    // Find the counsellor
+    const c = counsellors.find(c => c.HC_ID === id);
+
+    // Render profile
+    if (c) {
+      document.getElementById("profile").innerHTML = `
+        <div class="profile-card">
+          <img src="images/${c.HC_Profile_URL}" alt="${c.HC_Name}" class="profile-img">
+          <h2>${c.HC_Name}</h2>
+          <p><strong>Specialization:</strong> ${c.HC_Sp_Field}</p>
+          <p><strong>Weekdays:</strong> ${c.HC_WD_Timing}</p>
+          <p><strong>Sunday:</strong> ${c.HC_SD_Timing}</p>
+
+          <div class="profile-actions">
+            <button class="msgBtn">Message</button>
+            <button class="apptBtn">Book Appointment</button>
+            <button class="voiceCallBtn">Voice Call</button>
+            <button class="videoCallBtn">Video Call</button>
+          </div>
+        </div>
+      `;
+    } else {
+      document.getElementById("profile").innerHTML = `<p>Counsellor not found.</p>`;
+    }
+  </script>
+</body>
+</html>

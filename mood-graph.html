@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Graph</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/mood-graph.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <main class="mood-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <h3>Mood Tracking</h3>
+      <button onclick="loadMoodGraph('daily')">Daily</button>
+      <button onclick="loadMoodGraph('weekly')">Weekly</button>
+      <button onclick="loadMoodGraph('monthly')">Monthly</button>
+    </aside>
+
+    <!-- Graph Section -->
+    <section class="graph-section">
+      <h2>Mood Graph</h2>
+      <div class="chart-wrapper">
+        <canvas id="moodChart" width="750" height="400"></canvas>
+      </div>
+      <p id="moodRemark" class="remark"></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script src="header.js" defer></script>
+  <script>
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+      if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        script.onload = () => { if (window.updateHeader) window.updateHeader(); };
+        document.body.appendChild(script);
+      }
+    }
+
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    const ctx = document.getElementById("moodChart").getContext("2d");
+
+    // Generate random mood scores
+    function generateMoodData(type) {
+      let labels;
+      if (type === "daily") {
+        labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      } else if (type === "weekly") {
+        labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
+      } else {
+        labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+      }
+      return {
+        labels,
+        scores: labels.map(() => Math.floor(Math.random() * 100))
+      };
+    }
+
+    let moodChart;
+
+    // Initialize chart
+    function initMoodChart() {
+      const { labels, scores } = generateMoodData("daily");
+      moodChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Mood Score",
+            data: scores,
+            borderColor: "#7b4ed4",
+            backgroundColor: "rgba(123, 78, 212, 0.2)",
+            tension: 0.3,
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: "#5a3ea1"
+          }]
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: { stepSize: 20 }
+            }
+          }
+        }
+      });
+      updateMoodRemark(scores);
+    }
+
+    // Load new mood graph
+    function loadMoodGraph(type) {
+      const { labels, scores } = generateMoodData(type);
+      moodChart.data.labels = labels;
+      moodChart.data.datasets[0].data = scores;
+      moodChart.data.datasets[0].label = `${type.charAt(0).toUpperCase() + type.slice(1)} Mood`;
+      moodChart.update();
+      updateMoodRemark(scores);
+    }
+
+    // AI-like remark generator
+    function updateMoodRemark(scores) {
+      const remarkEl = document.getElementById("moodRemark");
+      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const variance = Math.max(...scores) - Math.min(...scores);
+
+      if (variance > 60) {
+        remarkEl.textContent = "⚠️ Mood fluctuates heavily — possible bipolar tendencies, consider professional guidance.";
+      } else if (avg > 70) {
+        remarkEl.textContent = "😊 Mood is generally positive and stable.";
+      } else if (avg < 40) {
+        remarkEl.textContent = "😔 Mood is generally low — possible signs of depression.";
+      } else {
+        remarkEl.textContent = "🙂 Mood is stable with mild fluctuations.";
+      }
+    }
+
+    // Initialize chart on load
+    initMoodChart();
+  </script>
+</body>
+</html>

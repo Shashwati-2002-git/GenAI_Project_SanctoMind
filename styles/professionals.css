@@ -1,0 +1,71 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f7fb;
+  color: #333;
+}
+
+.page-heading {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.pro-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.pro-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.pro-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.pro-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.pro-card h3 {
+    margin: 10px 0 5px;
+}
+.pro-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+.timing {
+    font-size: 13px;
+    color: #555;
+}
+/* View Profile Button */
+.view-profile-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  font-size: 0.95em;
+  font-weight: 500;
+  color: #fff;
+  background-color: #7b4ed4;
+  border: none;
+  border-radius: 8px; /* rounded rectangle */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-profile-btn:hover {
+  background-color: #5a3ea1;
+}

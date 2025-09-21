@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Tracker</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/mood-tracker.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <main class="mood-container">
+    <h2>Log Your Current Mood</h2>
+    <select id="mood-select">
+      <option value="Depressed">😔 Depressed</option>
+      <option value="Very Sad">😭 Very Sad</option>
+      <option value="Sad">😢 Sad</option>
+      <option value="Neutral">😐 Neutral</option>
+      <option value="Happy">😊 Happy</option>
+      <option value="Very Happy">🤩 Very Happy</option>
+    </select>
+
+    <button id="log-mood-btn">Log Mood</button>
+
+    <button id="show-graph-btn" onclick="window.location.href='mood-graph.html'">
+      Display Mood Graph
+    </button>
+  </main>
+
+  <!-- ✅ Footer should be OUTSIDE of main -->
+  <div id="footer"></div>
+
+  <script src="header.js" defer></script>
+  <script>
+    // Load header & footer
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+
+      if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        document.body.appendChild(script);
+      }
+    }
+
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    // Toggle Log Mood button
+    const logBtn = document.getElementById("log-mood-btn");
+    logBtn.addEventListener("click", () => {
+      if (logBtn.innerText === "Log Mood") {
+        logBtn.innerText = "Mood Logged";
+      } else {
+        logBtn.innerText = "Log Mood";
+      }
+    });
+  </script>
+</body>
+</html>

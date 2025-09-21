@@ -1,0 +1,60 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f7fb;
+  color: #333;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.profile-card img.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.profile-card h2 {
+  margin: 10px 0;
+  color: #3d2c8d;
+}
+
+.profile-card p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.profile-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.profile-actions button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.msgBtn, .apptBtn, .voiceCallBtn, .videoCallBtn {
+  background: #7b4ed4;
+  color: white;
+}
+
+.msgBtn:hover, .apptBtn:hover, .voiceCallBtn:hover, .videoCallBtn:hover {
+  background: #5a3ea1;
+}

@@ -1,0 +1,137 @@
+/* ---------- HEADER STYLES ---------- */
+header {
+  background: linear-gradient(135deg, #3d2c8d, #5a3ea1, #7b4ed4);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  justify-content: space-between; /* brand left, links right */
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Left Section */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px; /* rounded square */
+  object-fit: cover;
+  background: white; /* fallback background */
+  padding: 4px;
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.brand-text p {
+  margin: 0;
+  font-size: 0.95em;
+  color: #e0d9ff;
+}
+
+/* Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.login-link:hover {
+  color: #ffd700;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 6px;
+}
+
+.dashboard-link, .home-link, .professional-joining-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dashboard-link:hover, .home-link:hover, .professional-joining-link:hover {
+  color: #ffd700;
+}
+
+/* Menu dropdown */
+.menu-container {
+  position: relative;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-btn:hover {
+  color: #ffd700;
+}
+
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.menu-dropdown a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 12px;
+  text-align: left;
+}
+
+.menu-dropdown a:hover {
+  background: #f0f0f5;
+}
+
+/* ---------- RESPONSIVE HEADER ---------- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-left {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .header-right {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

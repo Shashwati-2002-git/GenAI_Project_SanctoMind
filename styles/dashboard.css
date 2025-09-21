@@ -1,0 +1,48 @@
+/* Dashboard Layout */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f7fb;
+  color: #333;
+  margin: 0;            /* removes default browser margin */
+  padding: 0;           /* no top padding */
+}
+
+/* Container grid */
+.dashboard-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 40px;    /* add spacing below header */
+  padding: 0 30px 30px; /* only side + bottom padding */
+}
+
+/* Card styling */
+.dashboard-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  border-color: #7b4ed4;
+  box-shadow: 0 10px 20px rgba(61, 44, 141, 0.2);
+  background: linear-gradient(135deg, #ffffff, #f9f7ff);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-card {
+    font-size: 1em;
+    padding: 20px;
+  }
+}

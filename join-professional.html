@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join as Professional</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/join-professional.css"> <!-- reusing login.css -->
+  <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Main Content -->
+  <main class="signin-container">
+    <div class="form-section">
+      <h2>Join as a Professional</h2>
+      <form id="joinForm">
+        
+        <!-- Name -->
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <!-- Dropdown -->
+        <select id="role" required>
+          <option value="">-- Select Role --</option>
+          <option value="counsellor">Mental Health Counsellor</option>
+          <option value="psychiatrist">Psychiatrist</option>
+        </select>
+
+        <!-- Phone -->
+        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+
+        <!-- Email -->
+        <input type="email" id="email" placeholder="Email ID" required>
+
+        <!-- Specialization -->
+        <input type="text" id="specialization" placeholder="Specialization (e.g., Anxiety, Depression)" required>
+
+        <!-- Degree certificate -->
+        <label for="certificate">Upload Degree Certificate:</label>
+        <input type="file" id="certificate" accept=".pdf,.jpg,.jpeg,.png" required>
+
+        <!-- Govt ID -->
+        <label for="govId">Upload Government ID:</label>
+        <input type="file" id="govId" accept=".pdf,.jpg,.jpeg,.png" required>
+
+        <!-- Submit -->
+        <button type="submit" class="btn">Submit</button>
+      </form>
+
+      <p id="message"></p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script>
+    // Load header & footer (reused from login page)
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+      if (id === "header") {
+        const script = document.createElement("script");
+        script.src = "header.js";
+        document.body.appendChild(script);
+      }
+    }
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    // Handle form (front-end only)
+    document.getElementById("joinForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // Simple check
+      const name = document.getElementById("name").value.trim();
+      const role = document.getElementById("role").value;
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const specialization = document.getElementById("specialization").value.trim();
+
+      if (name && role && phone && email && specialization) {
+        document.getElementById("message").innerText = "✅ Application submitted successfully!";
+        document.getElementById("message").style.color = "green";
+        document.getElementById("joinForm").reset();
+      } else {
+        document.getElementById("message").innerText = "❌ Please fill in all required fields.";
+        document.getElementById("message").style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

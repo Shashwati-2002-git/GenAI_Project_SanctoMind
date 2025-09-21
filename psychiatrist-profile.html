@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Psychiatrist Profile</title>
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/psychiatrist-profile.css">
+  <link rel="stylesheet" href="styles/footer.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <div class="profile-container" id="profile"></div>
+
+  <div id="footer"></div>
+
+  <script>
+    // Reuse counsellors data
+    const counsellorsData = [
+      {
+        HC_ID: 1,
+        HC_Name: "Dr. Arjun Mehta",
+        HC_Sp_Field: "ADHD",
+        HC_Profile_URL: "Psychiatrist1.jpeg",
+        HC_WD_Timing: "9 AM - 6 PM",
+        HC_SD_Timing: "10 AM - 1 PM",
+        HC_Desc: "Dr. Arjun Mehta is an experienced psychiatrist specializing in ADHD. He provides tailored care to help patients build focus and manage hyperactivity."
+      },
+      {
+        HC_ID: 2,
+        HC_Name: "Dr. Priya Sharma",
+        HC_Sp_Field: "General Mental Health",
+        HC_Profile_URL: "Psychiatrist2.jpeg",
+        HC_WD_Timing: "9 AM - 5 PM",
+        HC_SD_Timing: "10 AM - 2 PM",
+        HC_Desc: "Dr. Priya Sharma focuses on holistic mental health treatment and counseling for emotional well-being."
+      },
+      {
+        HC_ID: 3,
+        HC_Name: "Dr. Rohan Kapoor",
+        HC_Sp_Field: "Anxiety & Depression",
+        HC_Profile_URL: "Psychiatrist3.jpeg",
+        HC_WD_Timing: "10 AM - 6 PM",
+        HC_SD_Timing: "11 AM - 3 PM",
+        HC_Desc: "Dr. Rohan Kapoor helps patients manage anxiety and depression with evidence-based therapy and compassionate care."
+      },
+      {
+        HC_ID: 4,
+        HC_Name: "Dr. Anjali Rao",
+        HC_Sp_Field: "OCD Specialist",
+        HC_Profile_URL: "Psychiatrist4.jpeg",
+        HC_WD_Timing: "9 AM - 4 PM",
+        HC_SD_Timing: "Closed",
+        HC_Desc: "Dr. Anjali Rao is a specialist in treating Obsessive-Compulsive Disorder, offering strategies for control and recovery."
+      },
+      {
+        HC_ID: 5,
+        HC_Name: "Dr. Sameer Khanna",
+        HC_Sp_Field: "PTSD",
+        HC_Profile_URL: "Psychiatrist5.jpeg",
+        HC_WD_Timing: "8 AM - 3 PM",
+        HC_SD_Timing: "Closed",
+        HC_Desc: "Dr. Sameer Khanna works with PTSD patients to restore peace and improve quality of life."
+      },
+      {
+        HC_ID: 6,
+        HC_Name: "Dr. Neha Verma",
+        HC_Sp_Field: "Alzheimer's",
+        HC_Profile_URL: "Psychiatrist6.jpeg",
+        HC_WD_Timing: "11 AM - 7 PM",
+        HC_SD_Timing: "12 PM - 4 PM",
+        HC_Desc: "Dr. Neha Verma provides specialized care for Alzheimer’s patients with a focus on memory care."
+      },
+      {
+        HC_ID: 7,
+        HC_Name: "Dr. Karan Singh",
+        HC_Sp_Field: "Addiction Psychiatry",
+        HC_Profile_URL: "Psychiatrist7.jpeg",
+        HC_WD_Timing: "9 AM - 6 PM",
+        HC_SD_Timing: "10 AM - 12 PM",
+        HC_Desc: "Dr. Karan Singh is an addiction psychiatrist dedicated to helping patients recover from substance dependencies."
+      },
+      {
+        HC_ID: 8,
+        HC_Name: "Dr. Meera Iyer",
+        HC_Sp_Field: "Dementia",
+        HC_Profile_URL: "Psychiatrist8.jpeg",
+        HC_WD_Timing: "10 AM - 5 PM",
+        HC_SD_Timing: "Closed",
+        HC_Desc: "Dr. Meera Iyer specializes in dementia treatment and elderly mental health care."
+      }
+    ];
+
+    // Load header/footer
+    async function loadComponent(id, file) {
+      const res = await fetch(file);
+      document.getElementById(id).innerHTML = await res.text();
+    }
+    loadComponent("header", "header.html");
+    loadComponent("footer", "footer.html");
+
+    // Get query param
+    const params = new URLSearchParams(window.location.search);
+    const hcId = parseInt(params.get("hc_id"));
+
+    // Find doctor
+    const doctor = counsellorsData.find(c => c.HC_ID === hcId);
+
+    // Render profile
+    if (doctor) {
+      document.getElementById("profile").innerHTML = `
+        <div class="profile-card">
+          <img src="images/${doctor.HC_Profile_URL}" alt="${doctor.HC_Name}" class="profile-img">
+          <h2>${doctor.HC_Name}</h2>
+          <p>${doctor.HC_Desc}</p>
+          <p><strong>Specialization:</strong> ${doctor.HC_Sp_Field}</p>
+          <p><strong>Weekdays:</strong> ${doctor.HC_WD_Timing}</p>
+          <p><strong>Sunday:</strong> ${doctor.HC_SD_Timing}</p>
+          <div class="profile-buttons">
+            <button class="msgBtn">💬 Message</button>
+            <button class="apptBtn">📅 Schedule Appointment</button>
+            <button class="voiceCallBtn">📞 Voice Call</button>
+            <button class="videoCallBtn">🎥 Video Call</button>
+          </div>
+        </div>
+      `;
+    } else {
+      document.getElementById("profile").innerHTML = `<p>Profile not found.</p>`;
+    }
+  </script>
+</body>
+</html>

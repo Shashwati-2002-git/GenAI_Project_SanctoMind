@@ -1,0 +1,78 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f7fb;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Layout */
+.mood-container {
+  display: flex;
+  height: calc(100vh - 120px);
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.sidebar h3 {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  color: #3d2c8d;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #7b4ed4;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sidebar button:hover {
+  background: #5a3ea1;
+}
+
+/* Graph section */
+.graph-section {
+  flex-grow: 1;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.graph-section h2 {
+  margin-bottom: 20px;
+  color: #3d2c8d;
+  text-align: center;
+}
+
+/* Chart wrapper */
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Remark */
+.remark {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #444;
+}
